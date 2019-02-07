@@ -1,5 +1,9 @@
 var express = require("express");
 var app = express();
+
+const { port} = require('./db-config/config');
+
+
 var mongoose = require('mongoose');
 var cors = require('cors');
 var originsWhitelist = [
@@ -21,13 +25,13 @@ app.use(bodyparser.urlencoded({ extended: true }))
 var accountRouter = require('./routermodel/account.router');
 app.use("/api", accountRouter);
 
-var productRourter = require('./routermodel/product.router');
-app.use("/api", productRourter);
+// var productRourter = require('./routermodel/product.router');
+// app.use("/api", productRourter);
 
 mongoose.connect("mongodb://localhost/onlineshopping", () => {
     console.log('Database connected')
 })
 
-app.listen(3000, () => {
-    console.log('Server started listening on port 3000')
+app.listen(port, () => {
+    console.log(`Server started listening on port  ${port}`)
 })
